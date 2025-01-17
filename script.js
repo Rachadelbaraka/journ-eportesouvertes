@@ -220,3 +220,27 @@ recommencerButton.addEventListener("click", () => {
     demarrerButton.style.display = "block";
     progressBar.style.width = "0%";
 });
+
+suivantButton.addEventListener("click", () => {
+    // Vérifie si une option a été sélectionnée
+    const selectedOption = optionsElement.querySelector(".selected");
+    if (selectedOption) {
+        // Ajoute le score en fonction de la réponse sélectionnée
+        const index = Array.from(optionsElement.children).indexOf(selectedOption);
+        const questionActuelle = questions[questionIndex];
+        if (questionActuelle.reponses[index] === "SISR") {
+            scoreSISR++;
+        } else if (questionActuelle.reponses[index] === "SLAM") {
+            scoreSLAM++;
+        }
+    }
+
+    // Passe à la question suivante ou affiche les résultats
+    questionIndex++;
+    if (questionIndex < questions.length) {
+        afficherQuestion();
+    } else {
+        afficherResultat();
+    }
+});
+
